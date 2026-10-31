@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="diarylogo.png">
     <title>Aura - Kişisel Günlük ve Yaşam Asistanı</title>
     
     <!-- Favicon (Tarayıcı Sekmesi İkonu) -->
@@ -52,9 +51,10 @@
             <h2 id="lockTitle" class="text-2xl font-bold text-gray-800 mb-2">Aura'ya Hoş Geldin</h2>
             <p id="lockDesc" class="text-sm text-gray-500 mb-6">Devam etmek için lütfen PIN şifreni gir.</p>
             
-            <div id="setupPinArea" class="hidden mb-4">
-                <input type="password" id="newPinInput" maxlength="4" placeholder="4 Haneli PIN Belirle" class="w-full text-center tracking-widest text-xl px-4 py-3 rounded-2xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white/50 mb-3">
-                <input type="text" id="securityQuestion" placeholder="Gizli Soru: En sevdiğin renk?" class="w-full text-sm px-4 py-2 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white/50 mb-3">
+            <div id="setupPinArea" class="hidden mb-4 space-y-3">
+                <input type="text" id="userNameInput" placeholder="Adın (Örn: Naz)" class="w-full text-center text-sm px-4 py-3 rounded-2xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white/70">
+                <input type="password" id="newPinInput" maxlength="4" placeholder="4 Haneli PIN Belirle" class="w-full text-center tracking-widest text-xl px-4 py-3 rounded-2xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white/70">
+                <input type="text" id="securityQuestion" placeholder="Gizli Soru: En sevdiğin renk?" class="w-full text-center text-sm px-4 py-3 rounded-2xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white/70">
             </div>
 
             <div id="loginPinArea">
@@ -74,43 +74,56 @@
         <!-- YAN MENÜ (SIDEBAR) -->
         <aside class="w-full md:w-64 glass-panel rounded-3xl p-5 flex flex-col justify-between shadow-lg">
             <div>
-                <div class="flex items-center gap-3 px-2 mb-8">
-                    <img src="diarylogo.png" alt="Aura Logo" class="w-10 h-10 rounded-2xl object-cover shadow-md border border-white">
-                    <div>
-                        <h1 class="font-bold text-lg text-gray-800 leading-tight">Aura Günlük</h1>
-                        <p class="text-xs text-purple-500 font-medium">Kişisel Yaşam Alanı</p>
+                <div class="flex items-center justify-between px-2 mb-6">
+                    <div class="flex items-center gap-3">
+                        <img src="diarylogo.png" alt="Aura Logo" class="w-10 h-10 rounded-2xl object-cover shadow-md border border-white">
+                        <div>
+                            <h1 class="font-bold text-lg text-gray-800 leading-tight">Aura Günlük</h1>
+                            <p class="text-xs text-purple-500 font-medium" data-i18n="subtitle">Kişisel Yaşam Alanı</p>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Dil Seçici -->
+                <div class="mb-4 px-1">
+                    <select id="langSelector" onchange="changeLanguage(this.value)" class="w-full text-xs font-semibold px-3 py-2 rounded-xl border border-purple-200 bg-white/80 text-purple-700 focus:outline-none shadow-sm">
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="en">🇬🇧 English</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="zh">🇨🇳 中文</option>
+                        <option value="ja">🇯🇵 日本語</option>
+                    </select>
                 </div>
 
                 <nav class="space-y-1.5">
                     <button onclick="switchTab('dashboard')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition text-gray-600 hover:bg-white/60" data-tab="dashboard">
-                        <i class="fa-solid fa-house w-5 text-purple-400"></i> Genel Bakış
+                        <i class="fa-solid fa-house w-5 text-purple-400"></i> <span data-i18n="nav_dashboard">Genel Bakış</span>
                     </button>
                     <button onclick="switchTab('journal')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition text-gray-600 hover:bg-white/60" data-tab="journal">
-                        <i class="fa-solid fa-book-open w-5 text-blue-400"></i> Günlüklerim
+                        <i class="fa-solid fa-book-open w-5 text-blue-400"></i> <span data-i18n="nav_journals">Günlüklerim</span>
                     </button>
                     <button onclick="switchTab('routines')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition text-gray-600 hover:bg-white/60" data-tab="routines">
-                        <i class="fa-solid fa-list-check w-5 text-emerald-400"></i> Rutinler & To-Do
+                        <i class="fa-solid fa-list-check w-5 text-emerald-400"></i> <span data-i18n="nav_routines">Rutinler & To-Do</span>
                     </button>
                     <button onclick="switchTab('habits')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition text-gray-600 hover:bg-white/60" data-tab="habits">
-                        <i class="fa-solid fa-face-smile w-5 text-pink-400"></i> Ruh Hali & Alışkanlık
+                        <i class="fa-solid fa-face-smile w-5 text-pink-400"></i> <span data-i18n="nav_habits">Ruh Hali & Alışkanlık</span>
                     </button>
                     <button onclick="switchTab('affirmations')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition text-gray-600 hover:bg-white/60" data-tab="affirmations">
-                        <i class="fa-solid fa-seedling w-5 text-amber-400"></i> Olumlamalar
+                        <i class="fa-solid fa-seedling w-5 text-amber-400"></i> <span data-i18n="nav_affirmations">Olumlamalar</span>
                     </button>
                     <button onclick="switchTab('cycle')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition text-gray-600 hover:bg-white/60" data-tab="cycle">
-                        <i class="fa-solid fa-droplet w-5 text-rose-400"></i> Regl Takibi
+                        <i class="fa-solid fa-droplet w-5 text-rose-400"></i> <span data-i18n="nav_cycle">Regl Takibi</span>
                     </button>
                     <button onclick="switchTab('settings')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition text-gray-600 hover:bg-white/60" data-tab="settings">
-                        <i class="fa-solid fa-gear w-5 text-gray-400"></i> Ayarlar
+                        <i class="fa-solid fa-gear w-5 text-gray-400"></i> <span data-i18n="nav_settings">Ayarlar</span>
                     </button>
                 </nav>
             </div>
 
             <div class="pt-4 border-t border-purple-100 flex items-center justify-between px-2">
-                <span class="text-xs text-gray-400 font-medium">Güvenli Oturum</span>
+                <span class="text-xs text-gray-400 font-medium" data-i18n="secure_session">Güvenli Oturum</span>
                 <button onclick="lockApp()" class="text-xs bg-purple-100 hover:bg-purple-200 text-purple-600 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 font-semibold">
-                    <i class="fa-solid fa-lock"></i> Kilitle
+                    <i class="fa-solid fa-lock"></i> <span data-i18n="lock_btn">Kilitle</span>
                 </button>
             </div>
         </aside>
@@ -123,7 +136,7 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center bg-gradient-to-r from-purple-200/50 to-blue-200/50 p-6 rounded-3xl border border-white/60">
                     <div>
                         <h2 class="text-2xl font-bold text-gray-800" id="welcomeGreeting">Günaydın ✨</h2>
-                        <p class="text-sm text-gray-600 mt-1">Bugün harika şeyler yazmak ve rutinlerini tamamlamak için harika bir gün!</p>
+                        <p class="text-sm text-gray-600 mt-1" data-i18n="dash_desc">Bugün harika şeyler yazmak ve rutinlerini tamamlamak için harika bir gün!</p>
                     </div>
                     <div class="mt-4 md:mt-0 bg-white/80 px-4 py-2 rounded-2xl shadow-sm text-sm font-semibold text-purple-600" id="currentDateDisplay">
                         --. --. ----
@@ -135,7 +148,7 @@
                     <div class="text-2xl text-purple-400 mt-1"><i class="fa-solid fa-quote-left"></i></div>
                     <div>
                         <p class="text-sm font-medium text-gray-700 italic" id="dailyQuoteText">"Küçük adımlar, büyük yolculukların başlangıcıdır."</p>
-                        <span class="text-xs text-purple-500 font-semibold mt-1 block">- Günün İlhamı</span>
+                        <span class="text-xs text-purple-500 font-semibold mt-1 block" data-i18n="daily_inspiration">- Günün İlhamı</span>
                     </div>
                 </div>
 
@@ -144,33 +157,33 @@
                     <div class="bg-white/70 p-4 rounded-2xl border border-purple-50 text-center shadow-sm">
                         <div class="text-purple-500 text-lg mb-1"><i class="fa-solid fa-book"></i></div>
                         <h3 class="text-2xl font-bold text-gray-800" id="statJournalCount">0</h3>
-                        <p class="text-xs text-gray-500 font-medium">Toplam Günlük</p>
+                        <p class="text-xs text-gray-500 font-medium" data-i18n="stat_journals">Toplam Günlük</p>
                     </div>
                     <div class="bg-white/70 p-4 rounded-2xl border border-purple-50 text-center shadow-sm">
                         <div class="text-emerald-500 text-lg mb-1"><i class="fa-solid fa-list-check"></i></div>
                         <h3 class="text-2xl font-bold text-gray-800" id="statTodoCount">0</h3>
-                        <p class="text-xs text-gray-500 font-medium">Tamamlanan Görev</p>
+                        <p class="text-xs text-gray-500 font-medium" data-i18n="stat_todos">Tamamlanan Görev</p>
                     </div>
                     <div class="bg-white/70 p-4 rounded-2xl border border-purple-50 text-center shadow-sm">
                         <div class="text-pink-500 text-lg mb-1"><i class="fa-solid fa-fire"></i></div>
                         <h3 class="text-2xl font-bold text-gray-800" id="statStreak">0 Gün</h3>
-                        <p class="text-xs text-gray-500 font-medium">Yazma Serisi</p>
+                        <p class="text-xs text-gray-500 font-medium" data-i18n="stat_streak">Yazma Serisi</p>
                     </div>
                     <div class="bg-white/70 p-4 rounded-2xl border border-purple-50 text-center shadow-sm">
                         <div class="text-amber-500 text-lg mb-1"><i class="fa-solid fa-heart"></i></div>
                         <h3 class="text-2xl font-bold text-gray-800" id="statAvgMood">😊</h3>
-                        <p class="text-xs text-gray-500 font-medium">Genel Ruh Hali</p>
+                        <p class="text-xs text-gray-500 font-medium" data-i18n="stat_mood">Genel Ruh Hali</p>
                     </div>
                 </div>
 
                 <!-- Son Günlükler Listesi -->
                 <div>
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-bold text-lg text-gray-800">Son Günlük Notların</h3>
-                        <button onclick="switchTab('journal')" class="text-xs text-purple-600 font-bold hover:underline">Tümünü Gör</button>
+                        <h3 class="font-bold text-lg text-gray-800" data-i18n="recent_journals">Son Günlük Notların</h3>
+                        <button onclick="switchTab('journal')" class="text-xs text-purple-600 font-bold hover:underline" data-i18n="see_all">Tümünü Gör</button>
                     </div>
                     <div id="recentJournalsList" class="space-y-3">
-                        <!-- Dinamik doldurulacak -->
+                        <!-- Dinamik -->
                     </div>
                 </div>
             </section>
@@ -179,11 +192,11 @@
             <section id="tab-journal" class="tab-content hidden space-y-6">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-800">Günlük Defterim</h2>
-                        <p class="text-sm text-gray-500">Düşüncelerini, anılarını ve hissettiklerini güvenle sakla.</p>
+                        <h2 class="text-2xl font-bold text-gray-800" data-i18n="journal_title">Günlük Defterim</h2>
+                        <p class="text-sm text-gray-500" data-i18n="journal_desc">Düşüncelerini, anılarını ve hissettiklerini güvenle sakla.</p>
                     </div>
                     <button onclick="openNewJournalModal()" class="bg-gradient-to-r from-purple-400 to-blue-400 text-white px-5 py-2.5 rounded-2xl shadow-md text-sm font-semibold hover:opacity-90 transition flex items-center gap-2">
-                        <i class="fa-solid fa-plus"></i> Yeni Günlük Yaz
+                        <i class="fa-solid fa-plus"></i> <span data-i18n="new_journal_btn">Yeni Günlük Yaz</span>
                     </button>
                 </div>
 
@@ -191,7 +204,7 @@
                 <div class="flex gap-3">
                     <div class="relative flex-1">
                         <i class="fa-solid fa-search absolute left-4 top-3.5 text-gray-400 text-sm"></i>
-                        <input type="text" id="journalSearchInput" oninput="renderJournals()" placeholder="Başlık veya içerikte ara..." class="w-full pl-11 pr-4 py-2.5 rounded-2xl border border-purple-100 bg-white/60 focus:outline-none focus:ring-2 focus:ring-purple-300 text-sm">
+                        <input type="text" id="journalSearchInput" oninput="renderJournals()" placeholder="Başlık veya içerikte ara..." data-i18n-placeholder="search_placeholder" class="w-full pl-11 pr-4 py-2.5 rounded-2xl border border-purple-100 bg-white/60 focus:outline-none focus:ring-2 focus:ring-purple-300 text-sm">
                     </div>
                 </div>
 
@@ -205,8 +218,8 @@
             <section id="tab-routines" class="tab-content hidden space-y-6">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-800">Günlük Rutinler & To-Do</h2>
-                        <p class="text-sm text-gray-500">Günlük görevlerini tamamla, akşam günlüğünü yazarken mutlu ol! ✨</p>
+                        <h2 class="text-2xl font-bold text-gray-800" data-i18n="routines_title">Günlük Rutinler & To-Do</h2>
+                        <p class="text-sm text-gray-500" data-i18n="routines_desc">Günlük görevlerini tamamla, akşam günlüğünü yazarken mutlu ol! ✨</p>
                     </div>
                     <div class="bg-purple-100/70 text-purple-700 px-4 py-2 rounded-2xl text-xs font-bold mt-2 md:mt-0" id="todoProgressText">
                         Tamamlanan: 0 / 0
@@ -214,15 +227,15 @@
                 </div>
 
                 <!-- Yeni Görev Ekleme Formu -->
-                <div class="bg-white/60 p-4 rounded-2xl border border-purple-100 flex gap-3">
-                    <input type="text" id="newTodoInput" placeholder="Yeni bir rutin veya görev ekle (Örn: 2 Litre su iç)..." class="flex-1 px-4 py-2.5 rounded-xl border border-purple-200 bg-white focus:outline-none focus:ring-2 focus:ring-purple-300 text-sm">
+                <div class="bg-white/60 p-4 rounded-2xl border border-purple-100 flex flex-col md:flex-row gap-3">
+                    <input type="text" id="newTodoInput" placeholder="Yeni bir rutin veya görev ekle..." data-i18n-placeholder="todo_placeholder" class="flex-1 px-4 py-2.5 rounded-xl border border-purple-200 bg-white focus:outline-none focus:ring-2 focus:ring-purple-300 text-sm">
                     <select id="newTodoCategory" class="px-3 py-2.5 rounded-xl border border-purple-200 bg-white text-sm text-gray-600 focus:outline-none">
                         <option value="🌿 Sağlık">🌿 Sağlık</option>
                         <option value="💻 Eğitim">💻 Eğitim</option>
                         <option value="✨ Kişisel">✨ Kişisel</option>
                         <option value="☕ Dinlenme">☕ Dinlenme</option>
                     </select>
-                    <button onclick="addTodoItem()" class="bg-purple-500 text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-purple-600 transition shadow-sm">
+                    <button onclick="addTodoItem()" class="bg-purple-500 text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-purple-600 transition shadow-sm" data-i18n="add_btn">
                         Ekle
                     </button>
                 </div>
@@ -236,14 +249,14 @@
             <!-- 4. RUH HALİ & ALIŞKANLIK -->
             <section id="tab-habits" class="tab-content hidden space-y-6">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-800">Ruh Hali & Alışkanlık Takibi</h2>
-                    <p class="text-sm text-gray-500">Bugünkü enerjini ve ruh halini kaydet.</p>
+                    <h2 class="text-2xl font-bold text-gray-800" data-i18n="habits_title">Ruh Hali & Alışkanlık Takibi</h2>
+                    <p class="text-sm text-gray-500" data-i18n="habits_desc">Bugünkü enerjini ve ruh halini kaydet.</p>
                 </div>
 
                 <!-- Günlük Mood Seçici -->
                 <div class="bg-white/60 p-6 rounded-3xl border border-purple-100 text-center space-y-4">
-                    <h3 class="font-bold text-gray-800 text-base">Bugün kendini nasıl hissediyorsun?</h3>
-                    <div class="flex justify-center gap-4 text-3xl" id="moodSelector">
+                    <h3 class="font-bold text-gray-800 text-base" data-i18n="mood_question">Bugün kendini nasıl hissediyorsun?</h3>
+                    <div class="flex flex-wrap justify-center gap-3 text-3xl" id="moodSelector">
                         <button onclick="selectMood('🥰')" class="p-3 rounded-2xl hover:bg-purple-100 transition transform hover:scale-110">🥰</button>
                         <button onclick="selectMood('😊')" class="p-3 rounded-2xl hover:bg-purple-100 transition transform hover:scale-110">😊</button>
                         <button onclick="selectMood('😐')" class="p-3 rounded-2xl hover:bg-purple-100 transition transform hover:scale-110">😐</button>
@@ -255,7 +268,7 @@
 
                 <!-- Son Alışkanlıklar / Geçmiş -->
                 <div class="bg-white/60 p-6 rounded-3xl border border-purple-100 space-y-4">
-                    <h3 class="font-bold text-gray-800">Son Kayıtlı Ruh Halleri</h3>
+                    <h3 class="font-bold text-gray-800" data-i18n="mood_history">Son Kayıtlı Ruh Halleri</h3>
                     <div id="moodHistoryList" class="space-y-2">
                         <!-- Dinamik -->
                     </div>
@@ -265,24 +278,24 @@
             <!-- 5. OLUMLAMALAR -->
             <section id="tab-affirmations" class="tab-content hidden space-y-6">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-800">Olumlama & Pozitif Alan</h2>
-                    <p class="text-sm text-gray-500">Kendine hatırlatmak istediğin pozitif cümleler.</p>
+                    <h2 class="text-2xl font-bold text-gray-800" data-i18n="aff_title">Olumlama & Pozitif Alan</h2>
+                    <p class="text-sm text-gray-500" data-i18n="aff_desc">Kendine hatırlatmak istediğin pozitif cümleler.</p>
                 </div>
 
                 <div class="bg-gradient-to-r from-pink-200/60 to-purple-200/60 p-8 rounded-3xl text-center space-y-4 border border-white">
-                    <span class="text-xs uppercase tracking-widest bg-white/70 px-3 py-1 rounded-full text-purple-600 font-bold">Günün Olumlaması</span>
+                    <span class="text-xs uppercase tracking-widest bg-white/70 px-3 py-1 rounded-full text-purple-600 font-bold" data-i18n="daily_aff_badge">Günün Olumlaması</span>
                     <h3 class="text-xl font-bold text-gray-800" id="dailyAffirmationCard">"Kendimi olduğu gibi kabul ediyor ve seviyorum."</h3>
-                    <button onclick="changeDailyAffirmation()" class="text-xs bg-white text-purple-600 px-4 py-2 rounded-xl font-bold shadow-sm hover:bg-purple-50 transition">
+                    <button onclick="changeDailyAffirmation()" class="text-xs bg-white text-purple-600 px-4 py-2 rounded-xl font-bold shadow-sm hover:bg-purple-50 transition" data-i18n="other_aff_btn">
                         Başka Olumlama Gör ✨
                     </button>
                 </div>
 
                 <!-- Özel Olumlama Ekle -->
                 <div class="bg-white/60 p-5 rounded-2xl border border-purple-100 space-y-3">
-                    <h3 class="font-bold text-gray-800 text-sm">Kendi Olumlamanı Ekle</h3>
-                    <div class="flex gap-3">
-                        <input type="text" id="newAffirmationInput" placeholder="Örn: Başarıya ulaşmak için iç güce sahibim..." class="flex-1 px-4 py-2.5 rounded-xl border border-purple-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-300">
-                        <button onclick="addCustomAffirmation()" class="bg-purple-500 text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-purple-600 transition">Ekle</button>
+                    <h3 class="font-bold text-gray-800 text-sm" data-i18n="add_aff_title">Kendi Olumlamanı Ekle</h3>
+                    <div class="flex flex-col md:flex-row gap-3">
+                        <input type="text" id="newAffirmationInput" placeholder="Örn: Başarıya ulaşmak için iç güce sahibim..." data-i18n-placeholder="aff_placeholder" class="flex-1 px-4 py-2.5 rounded-xl border border-purple-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-300">
+                        <button onclick="addCustomAffirmation()" class="bg-purple-500 text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-purple-600 transition" data-i18n="add_btn">Ekle</button>
                     </div>
                 </div>
 
@@ -294,51 +307,51 @@
             <!-- 6. REGL TAKİBİ -->
             <section id="tab-cycle" class="tab-content hidden space-y-6">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-800">Döngü & Regl Takibi</h2>
-                    <p class="text-sm text-gray-500">Bedenini dinle, döngülerini konforla takip et.</p>
+                    <h2 class="text-2xl font-bold text-gray-800" data-i18n="cycle_title">Döngü & Regl Takibi</h2>
+                    <p class="text-sm text-gray-500" data-i18n="cycle_desc">Bedenini dinle, döngülerini konforla takip et.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="bg-gradient-to-br from-rose-100 to-pink-100 p-6 rounded-3xl border border-white/80 text-center shadow-sm">
                         <div class="text-rose-500 text-xl mb-2"><i class="fa-solid fa-calendar-days"></i></div>
-                        <h4 class="text-sm text-gray-600 font-medium">Son Regl Tarihi</h4>
+                        <h4 class="text-sm text-gray-600 font-medium" data-i18n="cycle_last">Son Regl Tarihi</h4>
                         <input type="date" id="lastPeriodDate" onchange="saveCycleData()" class="mt-2 bg-white/80 px-3 py-1.5 rounded-xl border border-rose-200 text-sm font-bold text-gray-700 focus:outline-none">
                     </div>
                     <div class="bg-gradient-to-br from-purple-100 to-blue-100 p-6 rounded-3xl border border-white/80 text-center shadow-sm">
                         <div class="text-purple-500 text-xl mb-2"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                        <h4 class="text-sm text-gray-600 font-medium">Tahmini Sonraki Regl</h4>
+                        <h4 class="text-sm text-gray-600 font-medium" data-i18n="cycle_next">Tahmini Sonraki Regl</h4>
                         <h3 class="text-xl font-bold text-gray-800 mt-2" id="nextPeriodDisplay">-</h3>
                     </div>
                     <div class="bg-gradient-to-br from-blue-100 to-emerald-100 p-6 rounded-3xl border border-white/80 text-center shadow-sm">
                         <div class="text-blue-500 text-xl mb-2"><i class="fa-solid fa-heart-pulse"></i></div>
-                        <h4 class="text-sm text-gray-600 font-medium">Döngü Evresi</h4>
+                        <h4 class="text-sm text-gray-600 font-medium" data-i18n="cycle_phase">Döngü Evresi</h4>
                         <h3 class="text-lg font-bold text-gray-800 mt-2" id="cyclePhaseDisplay">Foliküler Evre</h3>
                     </div>
                 </div>
 
                 <!-- Semptom Notları -->
                 <div class="bg-white/60 p-6 rounded-3xl border border-purple-100 space-y-4">
-                    <h3 class="font-bold text-gray-800">Bugünkü Semptomlar & Notlar</h3>
-                    <textarea id="cycleNotesInput" oninput="saveCycleData()" placeholder="Kramp, enerji seviyesi, baş ağrısı veya ruh hali notları..." class="w-full p-4 rounded-2xl border border-purple-200 bg-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300 h-28"></textarea>
+                    <h3 class="font-bold text-gray-800" data-i18n="cycle_notes_title">Bugünkü Semptomlar & Notlar</h3>
+                    <textarea id="cycleNotesInput" oninput="saveCycleData()" placeholder="Kramp, enerji seviyesi, baş ağrısı veya ruh hali notları..." data-i18n-placeholder="cycle_notes_placeholder" class="w-full p-4 rounded-2xl border border-purple-200 bg-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300 h-28"></textarea>
                 </div>
             </section>
 
             <!-- 7. AYARLAR -->
             <section id="tab-settings" class="tab-content hidden space-y-6">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-800">Ayarlar & Veri Yönetimi</h2>
-                    <p class="text-sm text-gray-500">Verilerini yedekle veya güvenliğini yönet.</p>
+                    <h2 class="text-2xl font-bold text-gray-800" data-i18n="settings_title">Ayarlar & Veri Yönetimi</h2>
+                    <p class="text-sm text-gray-500" data-i18n="settings_desc">Verilerini yedekle veya güvenliğini yönet.</p>
                 </div>
 
                 <div class="bg-white/60 p-6 rounded-3xl border border-purple-100 space-y-4">
-                    <h3 class="font-bold text-gray-800 text-base">Veri Yedekleme (Altın Kural 🌟)</h3>
-                    <p class="text-xs text-gray-500">Tarayıcı verilerini kaybetmemek için düzenli aralıklarla yedek dosyası indirebilirsin.</p>
+                    <h3 class="font-bold text-gray-800 text-base" data-i18n="backup_title">Veri Yedekleme (Altın Kural 🌟)</h3>
+                    <p class="text-xs text-gray-500" data-i18n="backup_desc">Tarayıcı verilerini kaybetmemek için düzenli aralıklarla yedek dosyası indirebilirsin.</p>
                     <div class="flex flex-wrap gap-3 pt-2">
-                        <button onclick="exportData()" class="bg-blue-500 text-white px-5 py-2.5 rounded-2xl text-sm font-semibold hover:bg-blue-600 transition shadow-sm">
+                        <button onclick="exportData()" class="bg-blue-500 text-white px-5 py-2.5 rounded-2xl text-sm font-semibold hover:bg-blue-600 transition shadow-sm" data-i18n="export_btn">
                             <i class="fa-solid fa-download mr-2"></i> Verileri İndir (JSON)
                         </button>
                         <label class="bg-purple-500 text-white px-5 py-2.5 rounded-2xl text-sm font-semibold hover:bg-purple-600 transition shadow-sm cursor-pointer">
-                            <i class="fa-solid fa-upload mr-2"></i> Verileri Yükle
+                            <i class="fa-solid fa-upload mr-2"></i> <span data-i18n="import_btn">Verileri Yükle</span>
                             <input type="file" id="importFile" onchange="importData(event)" class="hidden" accept=".json">
                         </label>
                     </div>
@@ -357,16 +370,16 @@
             </div>
             <input type="hidden" id="editJournalId">
             <div>
-                <label class="text-xs font-semibold text-gray-500 block mb-1">Başlık</label>
-                <input type="text" id="journalTitleInput" placeholder="Bugün nasıl geçti?" class="w-full px-4 py-2.5 rounded-2xl border border-purple-200 bg-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300">
+                <label class="text-xs font-semibold text-gray-500 block mb-1" data-i18n="modal_title_label">Başlık</label>
+                <input type="text" id="journalTitleInput" placeholder="Bugün nasıl geçti?" data-i18n-placeholder="modal_title_placeholder" class="w-full px-4 py-2.5 rounded-2xl border border-purple-200 bg-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300">
             </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="text-xs font-semibold text-gray-500 block mb-1">Tarih</label>
+                    <label class="text-xs font-semibold text-gray-500 block mb-1" data-i18n="modal_date_label">Tarih</label>
                     <input type="date" id="journalDateInput" class="w-full px-4 py-2.5 rounded-2xl border border-purple-200 bg-white/70 text-sm focus:outline-none">
                 </div>
                 <div>
-                    <label class="text-xs font-semibold text-gray-500 block mb-1">Ruh Hali</label>
+                    <label class="text-xs font-semibold text-gray-500 block mb-1" data-i18n="modal_mood_label">Ruh Hali</label>
                     <select id="journalMoodInput" class="w-full px-4 py-2.5 rounded-2xl border border-purple-200 bg-white/70 text-sm focus:outline-none">
                         <option value="🥰">🥰 Harika</option>
                         <option value="😊">😊 İyi</option>
@@ -377,20 +390,371 @@
                 </div>
             </div>
             <div>
-                <label class="text-xs font-semibold text-gray-500 block mb-1">Günlük İçeriği</label>
-                <textarea id="journalContentInput" placeholder="Aklından geçenleri buraya yaz..." class="w-full p-4 rounded-2xl border border-purple-200 bg-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300 h-44"></textarea>
+                <label class="text-xs font-semibold text-gray-500 block mb-1" data-i18n="modal_content_label">Günlük İçeriği</label>
+                <textarea id="journalContentInput" placeholder="Aklından geçenleri buraya yaz..." data-i18n-placeholder="modal_content_placeholder" class="w-full p-4 rounded-2xl border border-purple-200 bg-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300 h-44"></textarea>
             </div>
             <div class="flex justify-end gap-3 pt-2">
-                <button onclick="closeJournalModal()" class="px-5 py-2.5 rounded-2xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition">İptal</button>
-                <button onclick="saveJournal()" class="px-6 py-2.5 rounded-2xl text-sm font-semibold bg-gradient-to-r from-purple-400 to-blue-400 text-white shadow-md hover:opacity-90 transition">Kaydet</button>
+                <button onclick="closeJournalModal()" class="px-5 py-2.5 rounded-2xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition" data-i18n="cancel_btn">İptal</button>
+                <button onclick="saveJournal()" class="px-6 py-2.5 rounded-2xl text-sm font-semibold bg-gradient-to-r from-purple-400 to-blue-400 text-white shadow-md hover:opacity-90 transition" data-i18n="save_btn">Kaydet</button>
             </div>
         </div>
     </div>
 
     <!-- JAVASCRIPT KODLARI -->
     <script>
+        // Çeviri Sözlüğü (TR, EN, DE, ZH, JA)
+        const translations = {
+            tr: {
+                subtitle: "Kişisel Yaşam Alanı",
+                nav_dashboard: "Genel Bakış",
+                nav_journals: "Günlüklerim",
+                nav_routines: "Rutinler & To-Do",
+                nav_habits: "Ruh Hali & Alışkanlık",
+                nav_affirmations: "Olumlamalar",
+                nav_cycle: "Regl Takibi",
+                nav_settings: "Ayarlar",
+                secure_session: "Güvenli Oturum",
+                lock_btn: "Kilitle",
+                dash_desc: "Bugün harika şeyler yazmak ve rutinlerini tamamlamak için harika bir gün!",
+                daily_inspiration: "- Günün İlhamı",
+                stat_journals: "Toplam Günlük",
+                stat_todos: "Tamamlanan Görev",
+                stat_streak: "Yazma Serisi",
+                stat_mood: "Genel Ruh Hali",
+                recent_journals: "Son Günlük Notların",
+                see_all: "Tümünü Gör",
+                journal_title: "Günlük Defterim",
+                journal_desc: "Düşüncelerini, anılarını ve hissettiklerini güvenle sakla.",
+                new_journal_btn: "Yeni Günlük Yaz",
+                search_placeholder: "Başlık veya içerikte ara...",
+                routines_title: "Günlük Rutinler & To-Do",
+                routines_desc: "Günlük görevlerini tamamla, akşam günlüğünü yazarken mutlu ol! ✨",
+                todo_placeholder: "Yeni bir rutin veya görev ekle...",
+                add_btn: "Ekle",
+                habits_title: "Ruh Hali & Alışkanlık Takibi",
+                habits_desc: "Bugünkü enerjini ve ruh halini kaydet.",
+                mood_question: "Bugün kendini nasıl hissediyorsun?",
+                mood_history: "Son Kayıtlı Ruh Halleri",
+                aff_title: "Olumlama & Pozitif Alan",
+                aff_desc: "Kendine hatırlatmak istediğin pozitif cümleler.",
+                daily_aff_badge: "Günün Olumlaması",
+                other_aff_btn: "Başka Olumlama Gör ✨",
+                add_aff_title: "Kendi Olumlamanı Ekle",
+                aff_placeholder: "Örn: Başarıya ulaşmak için iç güce sahibim...",
+                cycle_title: "Döngü & Regl Takibi",
+                cycle_desc: "Bedenini dinle, döngülerini konforla takip et.",
+                cycle_last: "Son Regl Tarihi",
+                cycle_next: "Tahmini Sonraki Regl",
+                cycle_phase: "Döngü Evresi",
+                cycle_notes_title: "Bugünkü Semptomlar & Notlar",
+                cycle_notes_placeholder: "Kramp, enerji seviyesi, baş ağrısı veya ruh hali notları...",
+                settings_title: "Ayarlar & Veri Yönetimi",
+                settings_desc: "Verilerini yedekle veya güvenliğini yönet.",
+                backup_title: "Veri Yedekleme (Altın Kural 🌟)",
+                backup_desc: "Tarayıcı verilerini kaybetmemek için düzenli aralıklarla yedek dosyası indirebilirsin.",
+                export_btn: "Verileri İndir (JSON)",
+                import_btn: "Verileri Yükle",
+                modal_title_label: "Başlık",
+                modal_title_placeholder: "Bugün nasıl geçti?",
+                modal_date_label: "Tarih",
+                modal_mood_label: "Ruh Hali",
+                modal_content_label: "Günlük İçeriği",
+                modal_content_placeholder: "Aklından geçenleri buraya yaz...",
+                cancel_btn: "İptal",
+                save_btn: "Kaydet",
+                lock_title_setup: "İlk Kurulum",
+                lock_desc_setup: "Uygulamanı kişiselleştirmek ve korumak için bilgilerini gir.",
+                lock_title_login: "Aura'ya Hoş Geldin",
+                lock_desc_login: "Devam etmek için lütfen PIN şifreni gir.",
+                name_placeholder: "Adın (Örn: Naz)",
+                pin_setup_placeholder: "4 Haneli PIN Belirle",
+                sec_placeholder: "Gizli Soru: En sevdiğin renk?",
+                login_btn: "Giriş Yap",
+                setup_btn: "Kurulumu Tamamla",
+                forgot_pin: "Şifremi Unuttum?"
+            },
+            en: {
+                subtitle: "Personal Living Space",
+                nav_dashboard: "Dashboard",
+                nav_journals: "My Journals",
+                nav_routines: "Routines & To-Do",
+                nav_habits: "Mood & Habits",
+                nav_affirmations: "Affirmations",
+                nav_cycle: "Cycle Tracker",
+                nav_settings: "Settings",
+                secure_session: "Secure Session",
+                lock_btn: "Lock",
+                dash_desc: "Today is a great day to write wonderful things and complete your routines!",
+                daily_inspiration: "- Daily Inspiration",
+                stat_journals: "Total Journals",
+                stat_todos: "Completed Tasks",
+                stat_streak: "Writing Streak",
+                stat_mood: "General Mood",
+                recent_journals: "Recent Journal Notes",
+                see_all: "See All",
+                journal_title: "Journal Notebook",
+                journal_desc: "Safely store your thoughts, memories, and feelings.",
+                new_journal_btn: "New Journal",
+                search_placeholder: "Search in title or content...",
+                routines_title: "Daily Routines & To-Do",
+                routines_desc: "Complete your daily tasks and feel happy when writing your evening journal! ✨",
+                todo_placeholder: "Add a new routine or task...",
+                add_btn: "Add",
+                habits_title: "Mood & Habit Tracking",
+                habits_desc: "Log your energy and mood today.",
+                mood_question: "How are you feeling today?",
+                mood_history: "Recent Mood History",
+                aff_title: "Affirmation & Positive Space",
+                aff_desc: "Positive sentences you want to remind yourself.",
+                daily_aff_badge: "Daily Affirmation",
+                other_aff_btn: "See Another Affirmation ✨",
+                add_aff_title: "Add Custom Affirmation",
+                aff_placeholder: "Ex: I have the inner strength to succeed...",
+                cycle_title: "Cycle & Period Tracker",
+                cycle_desc: "Listen to your body and comfortably track your cycles.",
+                cycle_last: "Last Period Date",
+                cycle_next: "Estimated Next Period",
+                cycle_phase: "Cycle Phase",
+                cycle_notes_title: "Today's Symptoms & Notes",
+                cycle_notes_placeholder: "Cramps, energy level, headache or mood notes...",
+                settings_title: "Settings & Data Management",
+                settings_desc: "Backup your data or manage your security.",
+                backup_title: "Data Backup (Golden Rule 🌟)",
+                backup_desc: "You can download backup files regularly to avoid losing browser data.",
+                export_btn: "Download Data (JSON)",
+                import_btn: "Import Data",
+                modal_title_label: "Title",
+                modal_title_placeholder: "How was your day?",
+                modal_date_label: "Date",
+                modal_mood_label: "Mood",
+                modal_content_label: "Journal Content",
+                modal_content_placeholder: "Write what's on your mind here...",
+                cancel_btn: "Cancel",
+                save_btn: "Save",
+                lock_title_setup: "Initial Setup",
+                lock_desc_setup: "Enter your info to personalize and protect your app.",
+                lock_title_login: "Welcome to Aura",
+                lock_desc_login: "Please enter your PIN password to continue.",
+                name_placeholder: "Your Name (Ex: Naz)",
+                pin_setup_placeholder: "Set 4-Digit PIN",
+                sec_placeholder: "Secret Question: Favorite color?",
+                login_btn: "Log In",
+                setup_btn: "Complete Setup",
+                forgot_pin: "Forgot Password?"
+            },
+            de: {
+                subtitle: "Persönlicher Lebensraum",
+                nav_dashboard: "Übersicht",
+                nav_journals: "Tagebücher",
+                nav_routines: "Routinen & To-Do",
+                nav_habits: "Stimmung & Gewohnheiten",
+                nav_affirmations: "Affirmationen",
+                nav_cycle: "Zyklustracker",
+                nav_settings: "Einstellungen",
+                secure_session: "Sichere Sitzung",
+                lock_btn: "Sperren",
+                dash_desc: "Heute ist ein wunderbarer Tag, um schöne Dinge zu schreiben und Routinen zu erledigen!",
+                daily_inspiration: "- Tägliche Inspiration",
+                stat_journals: "Gesamt Tagebücher",
+                stat_todos: "Erledigte Aufgaben",
+                stat_streak: "Schreibserie",
+                stat_mood: "Allgemeine Stimmung",
+                recent_journals: "Letzte Tagebuchnotizen",
+                see_all: "Alle anzeigen",
+                journal_title: "Tagebuch",
+                journal_desc: "Bewahre deine Gedanken, Erinnerungen und Gefühle sicher auf.",
+                new_journal_btn: "Neues Tagebuch",
+                search_placeholder: "In Titel oder Inhalt suchen...",
+                routines_title: "Tägliche Routinen & To-Do",
+                routines_desc: "Erledige tägliche Aufgaben und freue dich am Abend beim Schreiben! ✨",
+                todo_placeholder: "Neue Routine oder Aufgabe hinzufügen...",
+                add_btn: "Hinzufügen",
+                habits_title: "Stimmungs- & Gewohnheits-Tracker",
+                habits_desc: "Erfasse deine Energie und Stimmung von heute.",
+                mood_question: "Wie fühlst du dich heute?",
+                mood_history: "Letzter Stimmungsverlauf",
+                aff_title: "Affirmationen & Positiver Raum",
+                aff_desc: "Positive Sätze, an die du dich erinnern möchtest.",
+                daily_aff_badge: "Affirmation des Tages",
+                other_aff_btn: "Andere Affirmation sehen ✨",
+                add_aff_title: "Eigene Affirmation hinzufügen",
+                aff_placeholder: "Bsp: Ich habe die innere Stärke...",
+                cycle_title: "Zyklus- & Perioden-Tracker",
+                cycle_desc: "Höre auf deinen Körper und verfolge deine Zyklen komfortabel.",
+                cycle_last: "Letztes Periode-Datum",
+                cycle_next: "Voraussichtliche nächste Periode",
+                cycle_phase: "Zyklusphase",
+                cycle_notes_title: "Heutige Symptome & Notizen",
+                cycle_notes_placeholder: "Krämpfe, Energieniveau, Kopfschmerzen oder Notizen...",
+                settings_title: "Einstellungen & Datenverwaltung",
+                settings_desc: "Sichere deine Daten oder verwalte die Sicherheit.",
+                backup_title: "Datensicherung (Goldene Regel 🌟)",
+                backup_desc: "Du kannst regelmäßig Backups herunterladen, um Datenverlust zu vermeiden.",
+                export_btn: "Daten herunterladen (JSON)",
+                import_btn: "Daten hochladen",
+                modal_title_label: "Titel",
+                modal_title_placeholder: "Wie war dein Tag?",
+                modal_date_label: "Datum",
+                modal_mood_label: "Stimmung",
+                modal_content_label: "Inhalt",
+                modal_content_placeholder: "Schreibe hier, was dir durch den Kopf geht...",
+                cancel_btn: "Abbrechen",
+                save_btn: "Speichern",
+                lock_title_setup: "Ersteinrichtung",
+                lock_desc_setup: "Gib deine Daten ein, um die App zu schützen.",
+                lock_title_login: "Willkommen bei Aura",
+                lock_desc_login: "Bitte gib deine PIN ein, um fortzufahren.",
+                name_placeholder: "Dein Name (z.B. Naz)",
+                pin_setup_placeholder: "4-stellige PIN festlegen",
+                sec_placeholder: "Geheime Frage: Lieblingsfarbe?",
+                login_btn: "Anmelden",
+                setup_btn: "Einrichtung abschließen",
+                forgot_pin: "Passwort vergessen?"
+            },
+            zh: {
+                subtitle: "个人生活空间",
+                nav_dashboard: "概览",
+                nav_journals: "我的日记",
+                nav_routines: "日常与待办",
+                nav_habits: "心情与习惯",
+                nav_affirmations: "积极肯定",
+                nav_cycle: "生理期追踪",
+                nav_settings: "设置",
+                secure_session: "安全会话",
+                lock_btn: "锁定",
+                dash_desc: "今天是书写美好事物和完成日常安排的绝佳一天！",
+                daily_inspiration: "- 每日灵感",
+                stat_journals: "总日记数",
+                stat_todos: "已完成任务",
+                stat_streak: "书写连续天数",
+                stat_mood: "总体心情",
+                recent_journals: "最近日记",
+                see_all: "查看全部",
+                journal_title: "日记本",
+                journal_desc: "安全存储您的思绪、回忆和感受。",
+                new_journal_btn: "写新日记",
+                search_placeholder: "搜索标题或内容...",
+                routines_title: "日常例行与待办",
+                routines_desc: "完成每日任务，晚上写日记时收获满满的幸福感！✨",
+                todo_placeholder: "添加新的例行事务或任务...",
+                add_btn: "添加",
+                habits_title: "心情与习惯追踪",
+                habits_desc: "记录你今天的能量与心情。",
+                mood_question: "你今天感觉怎么样？",
+                mood_history: "最近心情记录",
+                aff_title: "积极肯定与正能量",
+                aff_desc: "你想提醒自己的积极语句。",
+                daily_aff_badge: "今日肯定",
+                other_aff_btn: "查看其他肯定 ✨",
+                add_aff_title: "添加自定义肯定",
+                aff_placeholder: "例：我有取得成功的内在力量...",
+                cycle_title: "生理周期追踪",
+                cycle_desc: "倾听身体的声音，轻松追踪您的生理周期。",
+                cycle_last: "上次经期日期",
+                cycle_next: "预计下次经期",
+                cycle_phase: "周期阶段",
+                cycle_notes_title: "今日症状与备注",
+                cycle_notes_placeholder: "痛经、精力水平、头痛或心情备注...",
+                settings_title: "设置与数据管理",
+                settings_desc: "备份您的数据或管理安全性。",
+                backup_title: "数据备份（黄金法则 🌟）",
+                backup_desc: "您可以定期下载备份文件，以免丢失浏览器数据。",
+                export_btn: "下载数据 (JSON)",
+                import_btn: "导入数据",
+                modal_title_label: "标题",
+                modal_title_placeholder: "今天过得怎么样？",
+                modal_date_label: "日期",
+                modal_mood_label: "心情",
+                modal_content_label: "日记内容",
+                modal_content_placeholder: "在这里写下你的心事...",
+                cancel_btn: "取消",
+                save_btn: "保存",
+                lock_title_setup: "初始设置",
+                lock_desc_setup: "输入您的信息以个性化并保护您的应用。",
+                lock_title_login: "欢迎来到 Aura",
+                lock_desc_login: "请输入 PIN 密码继续。",
+                name_placeholder: "您的名字 (例如: Naz)",
+                pin_setup_placeholder: "设置 4 位 PIN 码",
+                sec_placeholder: "密保问题：最喜欢的颜色？",
+                login_btn: "登录",
+                setup_btn: "完成设置",
+                forgot_pin: "忘记密码？"
+            },
+            ja: {
+                subtitle: "パーソナルリビングスペース",
+                nav_dashboard: "ダッシュボード",
+                nav_journals: "マイドキュメント",
+                nav_routines: "ルーティン & ToDo",
+                nav_habits: "気分 & 習慣",
+                nav_affirmations: "アファメーション",
+                nav_cycle: "生理周期トラッカー",
+                nav_settings: "設定",
+                secure_session: "セキュアセッション",
+                lock_btn: "ロック",
+                dash_desc: "今日は素敵なことを書いてルーティンを完了するのに素晴らしい日です！",
+                daily_inspiration: "- デイリーインスピレーション",
+                stat_journals: "総ジャーナル数",
+                stat_todos: "完了したタスク",
+                stat_streak: "継続日数",
+                stat_mood: "一般的な気分",
+                recent_journals: "最近のジャーナルノート",
+                see_all: "すべて見る",
+                journal_title: "ダイアリーノート",
+                journal_desc: "あなたの思考、思い出、感情を安全に保管します。",
+                new_journal_btn: "新しいジャーナル",
+                search_placeholder: "タイトルや内容で検索...",
+                routines_title: "毎日のルーティン & ToDo",
+                routines_desc: "毎日のタスクを完了し、夜のジャーナルで幸せを感じましょう！✨",
+                todo_placeholder: "新しいルーティンやタスクを追加...",
+                add_btn: "追加",
+                habits_title: "気分と習慣の追跡",
+                habits_desc: "今日のエネルギーと気分を記録します。",
+                mood_question: "今日の気分はいかがですか？",
+                mood_history: "最近の気分の履歴",
+                aff_title: "アファメーション & ポジティブスペース",
+                aff_desc: "自分に言い聞かせたい前向きな言葉。",
+                daily_aff_badge: "今日のアファメーション",
+                other_aff_btn: "他のアファメーションを見る ✨",
+                add_aff_title: "カスタムアファメーションを追加",
+                aff_placeholder: "例：私には成功するための内なる力があります...",
+                cycle_title: "生理周期トラッカー",
+                cycle_desc: "体に耳を傾け、快適に周期を追跡します。",
+                cycle_last: "前回の生理日",
+                cycle_next: "次回の予想生理日",
+                cycle_phase: "周期の段階",
+                cycle_notes_title: "今日の症状とメモ",
+                cycle_notes_placeholder: "生理痛、エネルギーレベル、頭痛や気分のメモ...",
+                settings_title: "設定 & データ管理",
+                settings_desc: "データのバックアップやセキュリティ管理を行います。",
+                backup_title: "データバックアップ (黄金律 🌟)",
+                backup_desc: "ブラウザデータの消失を防ぐために、定期的にバックアップをダウンロードできます。",
+                export_btn: "データをダウンロード (JSON)",
+                import_btn: "データをインポート",
+                modal_title_label: "タイトル",
+                modal_title_placeholder: "今日はどんな日でしたか？",
+                modal_date_label: "日付",
+                modal_mood_label: "気分",
+                modal_content_label: "内容",
+                modal_content_placeholder: "ここに思いを書き留めて...",
+                cancel_btn: "キャンセル",
+                save_btn: "保存",
+                lock_title_setup: "初期設定",
+                lock_desc_setup: "アプリを保護するために情報を入力してください。",
+                lock_title_login: "Auraへようこそ",
+                lock_desc_login: "続行するにはPINパスワードを入力してください。",
+                name_placeholder: "お名前 (例: Naz)",
+                pin_setup_placeholder: "4桁のPINを設定",
+                sec_placeholder: "秘密の質問：好きな色？",
+                login_btn: "ログイン",
+                setup_btn: "設定を完了",
+                forgot_pin: "パスワードをお忘れですか？"
+            }
+        };
+
         // Veri Yapıları & LocalStorage
         let appData = JSON.parse(localStorage.getItem('aura_data')) || {
+            lang: 'tr',
+            userName: 'Naz',
             pin: null,
             securityAns: null,
             journals: [],
@@ -412,27 +776,70 @@
             localStorage.setItem('aura_data', JSON.stringify(appData));
         }
 
+        // Dil Değiştirme Fonksiyonu
+        function changeLanguage(lang) {
+            appData.lang = lang;
+            saveData();
+            applyTranslations();
+        }
+
+        function applyTranslations() {
+            const lang = appData.lang || 'tr';
+            document.getElementById('langSelector').value = lang;
+            const t = translations[lang];
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.innerText = t[key];
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (t[key]) el.placeholder = t[key];
+            });
+
+            // Kilit ekranı dinamik metinleri
+            if (!appData.pin) {
+                document.getElementById('lockTitle').innerText = t.lock_title_setup;
+                document.getElementById('lockDesc').innerText = t.lock_desc_setup;
+                document.getElementById('userNameInput').placeholder = t.name_placeholder;
+                document.getElementById('newPinInput').placeholder = t.pin_setup_placeholder;
+                document.getElementById('securityQuestion').placeholder = t.sec_placeholder;
+                document.getElementById('pinSubmitBtn').innerText = t.setup_btn;
+            } else {
+                document.getElementById('lockTitle').innerText = t.lock_title_login;
+                document.getElementById('lockDesc').innerText = t.lock_desc_login;
+                document.getElementById('pinSubmitBtn').innerText = t.login_btn;
+                document.getElementById('forgotPinText').innerText = t.forgot_pin;
+                document.getElementById('welcomeGreeting').innerText = `Günaydın, ${appData.userName || 'Naz'} ✨`;
+            }
+        }
+
         // Başlangıç Kontrolü (PIN Sistemi)
         window.onload = function() {
-            document.getElementById('currentDateDisplay').innerText = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('currentDateDisplay').innerText = new Date().toLocaleDateString(appData.lang === 'tr' ? 'tr-TR' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' });
             
             if (!appData.pin) {
-                document.getElementById('lockTitle').innerText = "İlk Kurulum";
-                document.getElementById('lockDesc').innerText = "Uygulamanı korumak için 4 haneli bir PIN ve gizli soru belirle.";
                 document.getElementById('setupPinArea').classList.remove('hidden');
                 document.getElementById('loginPinArea').classList.add('hidden');
-                document.getElementById('pinSubmitBtn').innerText = "Kurulumu Tamamla";
             } else {
                 document.getElementById('forgotPinText').classList.remove('hidden');
             }
+            applyTranslations();
             refreshAllUI();
         };
 
         function handlePinAction() {
             if (!appData.pin) {
+                const name = document.getElementById('userNameInput').value.trim();
                 const pin = document.getElementById('newPinInput').value;
-                const ans = document.getElementById('securityQuestion').value;
+                const ans = document.getElementById('securityQuestion').value.trim();
+
+                if (!name) { alert('Lütfen adını gir!'); return; }
                 if (pin.length !== 4) { alert('PIN 4 haneli olmalıdır!'); return; }
+                if (!ans) { alert('Lütfen gizli soruyu yanıtla!'); return; }
+
+                appData.userName = name;
                 appData.pin = pin;
                 appData.securityAns = ans;
                 saveData();
@@ -450,6 +857,7 @@
 
         function unlockApp() {
             document.getElementById('lockScreen').classList.add('hidden');
+            document.getElementById('welcomeGreeting').innerText = `Günaydın, ${appData.userName || 'Naz'} ✨`;
             switchTab('dashboard');
         }
 
@@ -743,6 +1151,7 @@
                 try {
                     appData = JSON.parse(e.target.result);
                     saveData();
+                    applyTranslations();
                     refreshAllUI();
                     alert('Veriler başarıyla yüklendi!');
                 } catch(err) {
